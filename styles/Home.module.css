@@ -6,7 +6,9 @@
   justify-content: center;
   align-items: center;
 }
-
+.paragraph{
+text-align:center
+}
 .main {
   padding: 5rem 0;
   flex: 1;

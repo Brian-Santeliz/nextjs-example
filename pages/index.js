@@ -1,13 +1,11 @@
-import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import { persons } from './data.json';
+import Meta from '../components/Meta';
 const Home = () => {
   return (
     <>
-      <Head>
-        <title>Title from Head of NextJS | Next Example</title>
-      </Head>
+      <Meta />
       <div className={styles.container}>
         <h1>Hello World</h1>
         <p className={styles.paragraph}>Mi firt paragraph in next</p>

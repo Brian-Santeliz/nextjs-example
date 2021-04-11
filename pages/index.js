@@ -1,29 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
+import { persons } from './data.json';
 const Home = () => {
-  const elements = [
-    {
-      name: 'Jelo',
-      lastname: 'Ryan',
-    },
-    {
-      name: 'Brian ',
-      lastname: 'Santeliz',
-    },
-    {
-      name: 'Oswald',
-      lastname: 'Bekan',
-    },
-    {
-      name: 'Brad',
-      lastname: 'Montris',
-    },
-    {
-      name: 'Leo',
-      lastname: 'Caster',
-    },
-  ];
   return (
     <>
       <Head>
@@ -36,7 +15,7 @@ const Home = () => {
           <a className={styles.linkStyle}>About</a>
         </Link>
       </div>
-      {elements.map((e) => {
+      {persons.map((e) => {
         return (
           <ul key={e.name}>
             <li>

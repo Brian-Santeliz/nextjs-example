@@ -4,7 +4,12 @@ import { persons } from "./data.json";
 import Meta from "../components/Meta";
 import useSWR from "swr";
 
-const Home = ({ data }) => {
+const Home = () => {
+  const url = "https://jsonplaceholder.typicode.com/posts";
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const { data, error } = useSWR(url, fetcher);
+  if (error) return <p>error...</p>;
+  if (!data) return <p>loading data...</p>;
   return (
     <>
       <Meta />
@@ -43,21 +48,20 @@ const Home = ({ data }) => {
     </>
   );
 };
-export async function getStaticProps() {
-  const url = "https://jsonplaceholder.typicode.com/posts";
-  const res = await fetch(url);
-  const data = await res.json();
+// export async function getStaticProps() {
+//   const res = await fetch(url);
+//   const data = await res.json();
 
-  if (!data) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { data },
-  };
-}
+//   if (!data) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: { data },
+//   };
+// }
 export default Home;

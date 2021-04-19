@@ -26,9 +26,13 @@ const Home = () => {
           return (
             <div key={post.id}>
               <Link href={`/post/${post.id}`}>
-                <h2 className="post">{post.title}</h2>
+                <h2
+                  className="post"
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                >
+                  {post.title}
+                </h2>
               </Link>
-              <p>{post.body}</p>
             </div>
           );
         })}

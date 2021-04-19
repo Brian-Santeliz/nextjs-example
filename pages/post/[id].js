@@ -1,15 +1,16 @@
-import { useRouter } from "next/router";
-import useSWR from "swr";
+// import { useRouter } from "next/router";
+// import useSWR from "swr";
 import Meta from "../../components/Meta";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
-const postDetails = () => {
-  const { query } = useRouter();
-  const url = `https://jsonplaceholder.typicode.com/posts/${query.id}`;
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, error } = useSWR(url, fetcher);
-  if (!data) return <p>Loading...</p>;
-  if (error) return <p>error...</p>;
+
+const url = `https://jsonplaceholder.typicode.com/posts/`;
+const postDetails = ({ data }) => {
+  //   const { query } = useRouter();
+  //   const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  //   const { data, error } = useSWR(`${url}/${query.id}`, fetcher);
+  //   if (!data) return <p>Loading...</p>;
+  //   if (error) return <p>error...</p>;
   const { title, body, userId } = data;
   return (
     <>
@@ -25,5 +26,19 @@ const postDetails = () => {
     </>
   );
 };
-
+export async function getServerSideProps(context) {
+  const res = await fetch(`${url}/${context.query.id}`);
+  const data = await res.json();
+  if (!data) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { data },
+  };
+}
 export default postDetails;
